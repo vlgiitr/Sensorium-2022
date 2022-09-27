@@ -21,7 +21,7 @@ def standard_trainer(
     seed,
     avg_loss=False,
     scale_loss=True,
-    loss_function="PoissonLoss",  
+    loss_function="PoissonLoss",
     stop_function="get_correlations",
     loss_accum_batch_n=None,
     device="cuda",
@@ -51,7 +51,7 @@ def standard_trainer(
         avg_loss: whether to average (or sum) the loss over a batch
         scale_loss: whether to scale the loss according to the size of the dataset
         loss_function: loss function to use
-        stop_function: the function (metric) that is used to determine the end of the training in early stopping; stops in case of overfitting 
+        stop_function: the function (metric) that is used to determine the end of the training in early stopping
         loss_accum_batch_n: number of batches to accumulate the loss over
         device: device to run the training on
         verbose: whether to print out a message for each optimizer step
@@ -216,4 +216,4 @@ def standard_trainer(
 
     score = np.mean(validation_correlation)
 
-    return score, output, model.state_dict(), 
+    return score, output, model.state_dict()
