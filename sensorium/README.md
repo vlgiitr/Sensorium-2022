@@ -1,53 +1,59 @@
+# SENSORIUM+ 2022 Competition Submission
+
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 [![hub](https://img.shields.io/badge/powered%20by-hub%20-ff5a1f.svg)](https://github.com/activeloopai/Hub)
 
-# SENSORIUM 2022 Competition
+## Contents
 
-![plot](figures/Fig1.png)
-SENSORIUM is a competition on predicting large scale mouse primary visual cortex activity. We will provide large scale datasets of neuronal activity in the visual cortex of mice. Participants will train models on pairs of natural stimuli and recorded neuronal responses, and submit the predicted responses to a set of test images for which responses are withheld.
+1. [Overview](#1-overview)
+2. [Setup Instructions](#2-setup-instructions)
+3. [Changes Implemented](#3-changes-implemented)
+4. [Evaluation](#4-evaluation)
 
-Join our challenge and compete for the best neural predictive model!
+## 1. Overview
 
-For more information about the competition, vist our [website](https://sensorium2022.net/).
+![Fig1](https://user-images.githubusercontent.com/102295389/205992650-ce6d5b0f-99b6-4e25-b88d-7cc7a4124925.png)
 
-Have a look at our [White paper on arXiv](https://arxiv.org/abs/2206.08666), which describes the dataset and competition in detail.
+The **NeurIPS 2022 The SENSORIUM competition** aimed to find the best neural predictive model that can predict the activity of thousands of neurons in the primary visual cortex of mice in response to natural images. <br/>
+### Tracks:
+**SENSORIUM** - Stimulus-only - Assessed on how well they predict neural activity solely in response to the visual stimulus averaged over all trials.<br/>
+**SENSORIUM+** - Stimulus-and-Behavior - Assessed based on how well they can predict neural activity given additional behavioral variables. <br/> <br/>
+This repository contains our submission for this competition, where we attempted to improve the baseline model for the competition track- **Sensorium+**.
 
-# Important Dates
-**June 20, 2022**: Start of the competition and data release.
-<br>**Oct 15, 2022**: Submission deadline.
-<br>**Oct 22, 2022**: Validation of all submitted scores completed. Preliminary winners are announced. Rank 1-3 in both competition tracks are contacted to provide the code for their submission.
-<br>**Nov 5, 2022**: Deadline for top-ranked entries to provide the code for their submission.
-<br>**Nov 15, 2022**: Winners contacted to contribute to the competition summary write-up.
+## 2. Setup Instructions
 
-# Starter-kit
+Below is a step-by-step guide for getting started.
 
-Below we provide a step-by-step guide for getting started with the competition.
-
-## 1. Pre-requisites
+### 1. Pre-requisites
 - install [**docker**](https://docs.docker.com/get-docker/) and [**docker-compose**](https://docs.docker.com/compose/install/)
 - install git
 - clone the repo via `git clone https://github.com/sinzlab/sensorium.git`
 
-## 2. Download neural data
+### 2. Download neural datasets
 
-You can download the data from [https://gin.g-node.org/cajal/Sensorium2022](https://gin.g-node.org/cajal/Sensorium2022) and place it in `sensorium/notebooks/data`.
-**Note:** Downloading the files all at once as a directory does lead to unfortunate errors. Thus, all datastes have to be downloaded individually.
+You can download the data from [https://gin.g-node.org/cajal/Sensorium2022](https://gin.g-node.org/cajal/Sensorium2022) and place it in `sensorium/notebooks/data`. <br/>
+**Note:** Downloading all the files at once as a directory leads to subsequent errors. Hence, download all datasets individually.
 
-## 3. Run the example notebooks
+### 3. Run the example notebooks
 
-### **Start Jupyterlab environment**
+#### **Start Jupyter environment**
 ```
 cd sensorium/
 docker-compose run -d -p 10101:8888 jupyterlab
 ```
-now, type in `localhost:10101` in your favorite browser, and you are ready to go!
+Now, type `localhost:10101` in your browser address bar, and you are good to go!
 
+## 3. Changes implemented:
+- While finding the mean and variance of the neuron specific receptive field, we experimented with introducing multiple samplings of the same to increase number of parameters. </br>
+- Also experimented with tuning the hyper-parameters such as making changes in the batch sizes of the datasets during training of the model, as well as layers, hidden channels, learning rate.
 
-## **Competition example notebooks**
-We provide notebooks that illustrate the structure of our data, our baselines models, and how to make a submission to the competition.
-<br>[**Dataset tutorial**](notebooks/dataset_tutorial/): Shows the structure of the data and how to turn it into a PyTorch DataLoader.
-<br>[**Model tutorial**](notebooks/model_tutorial/): How to train and evaluate our baseline models.
-<br>[**Submission tutorial**](notebooks/submission_tutorial/): Use our API to make a submission to our competition.
+## 4. Evaluation
 
+- We use the predictions stored in the .csv submission file, generated using the API provided by Sensorium to evaluate the performance of our method. 
+- We were able to replicate the Single Trial Correlation and The Correlation Average score of the State-Of-The-Art Model provided.
+    
 
-If you have any questions, feel free to reach out to us (Contact section on our [website](https://sensorium2022.net/)), or raise an issue here on GitHub!
+### Tutorial Notebooks
+[**Dataset tutorial**](notebooks/dataset_tutorial/):  Visual rendering and analysis of the structure of datasets through graphs and tables, and the code to turn it into a PyTorch DataLoader.
+<br>[**Model tutorial**](notebooks/model_tutorial/): How to train and evaluate baseline models.
+<br>[**Submission tutorial**](notebooks/submission_tutorial/): Use the Sensorium API to generate a .csv file and make a submission to the competition.
