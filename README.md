@@ -57,3 +57,6 @@ Now, type `localhost:10101` in your browser address bar, and you are good to go!
 [**Dataset tutorial**](notebooks/dataset_tutorial/):  Visual rendering and analysis of the structure of datasets through graphs and tables, and the code to turn it into a PyTorch DataLoader.
 <br>[**Model tutorial**](notebooks/model_tutorial/): How to train and evaluate baseline models.
 <br>[**Submission tutorial**](notebooks/submission_tutorial/): Use the Sensorium API to generate a .csv file and make a submission to the competition.
+
+### Team members
+Manav Goyal*, Manyana Tiwari*, Sarthak Gupta*
